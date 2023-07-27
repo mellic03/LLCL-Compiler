@@ -1,4 +1,6 @@
 .vscode
+build
+llclpp
 llcllexer
 llclparser
 nasmapi

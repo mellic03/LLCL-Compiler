@@ -234,10 +234,7 @@ NASM_Interface::function_return( const NASM_fn &fn, const NASM_bytes &bytes )
 {
     auto ind = getIndent(m_indentation);
     m_stream
-        << ind << ";-----------------------------------; function epilogue\n"
-        << ind << "mov " << SL_NASM_return_register << ", ["
-               << SL_var_prefix << SL_i32_prefix << bytes.name
-        << ind << "]\t; return value\n";
+        << ind << "mov " << SL_NASM_return_register << ", [" << SL_var_prefix << SL_i32_prefix << bytes.name;
 }
 
 
@@ -246,10 +243,7 @@ NASM_Interface::function_return( const NASM_fn &fn, const NASM_localvar &var )
 {
     auto ind = getIndent(m_indentation);
     m_stream
-        << ind << ";-----------------------------------; function epilogue\n"
-        << ind << "mov " << SL_NASM_return_register << ", [rbp + " << var.offset << "]\t; return value\n"
-        << ind << "mov rsp, rbp\n"
-        << ind << "pop rbp\n";
+        << ind << "mov " << SL_NASM_return_register << ", [rbp + " << var.offset << "]\t; return value\n";
 }
 
 
@@ -258,10 +252,7 @@ NASM_Interface::function_return( const NASM_fn &fn, std::string value )
 {
     auto ind = getIndent(m_indentation);
     m_stream
-        << ind << ";-----------------------------------; function epilogue\n"
-        << ind << "mov " << SL_NASM_return_register << ", " << value << "\t; return value\n"
-        << ind << "mov rsp, rbp\n"
-        << ind << "pop rbp\n";
+        << ind << "mov " << SL_NASM_return_register << ", " << value << "\t; return value\n";
 }
 
 void
@@ -269,6 +260,9 @@ NASM_Interface::function_end()
 {
     auto ind = getIndent(m_indentation);
     m_stream
+        << ind << ";-----------------------------------; function epilogue\n"
+        << ind << "mov rsp, rbp\n"
+        << ind << "pop rbp\n"
         << ind << "ret\n"
         << ind << ";-----------------------------------------------------;\n";
    
