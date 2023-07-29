@@ -198,17 +198,17 @@ NASM_Interface::function_push_localvar( NASM_fn &fn, size_t num_bytes )
 {
     fn.num_bytes_prologue += num_bytes;
 
-    if (fn.local_variables.size() > 0)
-        fn.local_variables.push_back(  { num_bytes + fn.local_variables.back().offset }  );
-    else
+    if (fn.local_variables.size() == 0)
         fn.local_variables.push_back(  { num_bytes + 8 }  );
+    else
+        fn.local_variables.push_back(  { num_bytes + fn.local_variables.back().offset }  );
 
     return fn.local_variables.back();
 }
 
 
 void
-NASM_Interface::function_assign_localvar( NASM_fn &fn, NASM_localvar &var, std::string value )
+NASM_Interface::function_assign_localvar( NASM_fn &fn, NASM_localvar var, std::string value )
 {
     auto ind = getIndent(m_indentation);
     m_stream
@@ -217,7 +217,7 @@ NASM_Interface::function_assign_localvar( NASM_fn &fn, NASM_localvar &var, std::
 
 
 void
-NASM_Interface::function_write_prologue( const NASM_fn &fn )
+NASM_Interface::function_write_prologue( NASM_fn &fn )
 {
     auto ind = getIndent(m_indentation);
     m_stream

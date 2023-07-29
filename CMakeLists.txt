@@ -13,35 +13,37 @@ add_definitions(-DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
 project(nasmapi)
 add_executable(
     ${PROJECT_NAME}
-    "common/tokenize.cpp"
-    "nasmAPI/NASM_Interface.cpp"
-    "nasmAPI/main.cpp"
+    "src/common/tokenize.cpp"
+    "src/nasmAPI/NASM_Interface.cpp"
+    "src/nasmAPI/main.cpp"
 )
 
 
 project(llclpp)
 add_executable(
     ${PROJECT_NAME}
-    "common/tokenize.cpp"
-    "LLCL_preprocessor/main.cpp"
+    "src/common/tokenize.cpp"
+    "src/LLCL_preprocessor/preprocessor.cpp"
+    "src/LLCL_preprocessor/main.cpp"
 )
 
 
 project(llcllexer)
 add_executable(
     ${PROJECT_NAME}
-    "common/tokenize.cpp"
-    "LLCL_lexer/lexer.cpp"
-    "LLCL_lexer/main.cpp"
+    "src/common/tokenize.cpp"
+    "src/common/syntax.cpp"
+    "src/LLCL_lexer/lexer.cpp"
+    "src/LLCL_lexer/main.cpp"
 )
 
 
 project(llclparser)
 add_executable(
     ${PROJECT_NAME}
-    "common/tokenize.cpp"
-    "LLCL_lexer/lexer.cpp"
-    "nasmAPI/NASM_Interface.cpp"
-    "LLCL_parser/parser.cpp"
-    "LLCL_parser/main.cpp"
+    "src/common/tokenize.cpp"
+    "src/common/syntax.cpp"
+    "src/nasmAPI/NASM_Interface.cpp"
+    "src/LLCL_parser/parser.cpp"
+    "src/LLCL_parser/main.cpp"
 )

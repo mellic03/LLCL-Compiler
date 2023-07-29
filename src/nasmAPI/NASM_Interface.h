@@ -118,8 +118,8 @@ public:
 
     */
     NASM_localvar       function_push_localvar( NASM_fn &fn, size_t num_bytes );
-    void                function_assign_localvar( NASM_fn &fn, NASM_localvar &var, std::string value );
-    void                function_write_prologue( const NASM_fn &fn );
+    void                function_assign_localvar( NASM_fn &fn, NASM_localvar var, std::string value );
+    void                function_write_prologue( NASM_fn &fn );
     void                function_return( const NASM_fn &fn, const NASM_bytes &bytes );
     void                function_return( const NASM_fn &fn, const NASM_localvar &var );
     void                function_return( const NASM_fn &fn, std::string value );
