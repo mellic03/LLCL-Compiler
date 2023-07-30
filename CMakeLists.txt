@@ -56,6 +56,8 @@ add_executable(
     "src/common/syntax.cpp"
     "src/LLCL_lexer/lexer.cpp"
     "src/nasmAPI/NASM_Interface.cpp"
+    "src/LLCL_parser/function.cpp"
+    "src/LLCL_parser/write.cpp"
     "src/LLCL_parser/parser.cpp"
     "src/main.cpp"
 )

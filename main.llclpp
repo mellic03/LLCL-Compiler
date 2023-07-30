@@ -1,7 +1,3 @@
-i64 MEMCURSOR = 0
-
-
-
 
 
 
@@ -14,13 +10,14 @@ endfn
 
 fn main (  i64 argc  i64 pp_argv  )  i08
 
-    i64 a = 15 + 5
-    i64 b
-    i64 c = a + b
+    i64 a = 1
+    i64 b = 2
+    i64 c = 3
+    i64 d = 4
 
-    b = a + c - 15 + 12
+    i64 n = a + b
 
-    return 0
+    return 8 * 10 - 15
 
 endfn
 

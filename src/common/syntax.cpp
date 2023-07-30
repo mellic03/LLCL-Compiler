@@ -41,6 +41,31 @@ llcl::is_literal( std::string str )
 };
 
 
+size_t
+llcl::typesize( Type dtype )
+{
+    switch (dtype)
+    {
+        case Type::u08:
+        case Type::i08:   return 1;
+
+        case Type::u16:   return 2;
+        case Type::i16:   return 2;
+
+        case Type::u32:   return 4;
+        case Type::i32:   return 4;
+        case Type::f32:   return 4;
+
+        case Type::u64:   return 8;
+        case Type::i64:   return 8;
+        case Type::f64:   return 8;
+    }
+
+    return 0;
+}
+
+
+
 std::ostream &operator << (std::ostream &os, llcl::SymbolClass s_class)
 {
     switch (s_class)
@@ -119,3 +144,37 @@ llcl::CommandClass llcl::commandclass_fromstr( std::string str )
 
     return CommandClass::NONE;
 }
+
+
+llcl::Type
+llcl::type_fromstr( std::string str )
+{
+    if (str == "u32")   return Type::u32;
+    if (str == "i32")   return Type::i32;
+    if (str == "f32")   return Type::f32;
+
+    if (str == "u64")   return Type::u64;
+    if (str == "i64")   return Type::i64;
+    if (str == "f64")   return Type::f64;
+
+    return Type::u00;
+}
+
+
+void llcl::print_tree( std::string prefix, Node *node, bool is_left )
+{
+    if (node == nullptr)
+    {
+        std::cout << prefix << (is_left ? "├─ " : "└─ " ) << std::endl;
+        return;
+    }
+
+    std::cout << prefix;
+    std::cout << (is_left ? "├─ " : "└─ " );
+    // std::cout << "< " << node->m_symbol.m_class << " : " << node->m_symbol.m_value << " >\n";
+    std::cout << "<" << node->m_symbol.m_class << ": " << node->m_symbol.m_value << ">\n";
+
+    llcl::print_tree( prefix + (is_left ? "│  " : "   "), node->right,  true);
+    llcl::print_tree( prefix + (is_left ? "│  " : "   "), node->left, false);
+}
+

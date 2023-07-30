@@ -34,9 +34,7 @@ namespace llcltok
     // Separate by whitespace
     std::vector<std::string>    sepws( std::string line );
 
-
     std::string concatTokens( const std::vector<std::string> &tokens, int start, int end, std::string sep = "" );
-
 
 
     size_t find( const std::string &line, std::string token );
