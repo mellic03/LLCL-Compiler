@@ -9,7 +9,7 @@ LLCL is a very low level (lower than C) programming language:
 - No built in memory allocation. At runtime a 100MB block of memory called MEMBLOCK is allocated. All dynamic memory allocation happens within MEMBLOCK and is written by the developer.
 
 - No pointer type. All pointers are simply 64-bit integers (`i64`) used to index into MEMBLOCK.
-The naming convention for pointers is to prefix them with "p_" for "pointer". Double pointers are prefixed with "pp_" and so on.
+The naming convention for pointers is to prefix them with "p_" for "pointer". Double pointers are prefixed with "pp_", triple pointers with "ppp_" and so on.
 
 - No structs/classes.
 

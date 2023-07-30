@@ -12,8 +12,18 @@ int main(int argc, char **argv)
 
     while (std::getline(instream, line))
     {
-        outstream << lexer.feedline(line) << "\n";
+        lexer.feedline(line);
     }
+
+
+    // outstream = std::ofstream("woop.asm");
+    // llcl::Parser parser;
+    
+    // llcl::Command command;
+    // while (lexer.nextcommand(command))
+    // {
+    //     parser.feedcommand(command);
+    // }
 
     instream.close();
     outstream.close();

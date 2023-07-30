@@ -33,6 +33,8 @@ public:
                         LLCLPP() {  };
 
     std::string &       remove_comment( std::string &line );
+    std::string &       pad_whitespace( std::string &line );
+    std::string &       replace_semicolons( std::string &line );
 
     bool                is_basic_macro_declaration( std::string line );
     void                load_basic_macro_declaration( std::string &line );

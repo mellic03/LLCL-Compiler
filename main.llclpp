@@ -1,0 +1,27 @@
+i64 MEMCURSOR = 0
+
+
+
+
+
+
+
+fn alloc (  i64 size  )  i64
+
+
+endfn
+
+
+fn main (  i64 argc  i64 pp_argv  )  i08
+
+    i64 a = 15 + 5
+    i64 b
+    i64 c = a + b
+
+    b = a + c - 15 + 12
+
+    return 0
+
+endfn
+
+

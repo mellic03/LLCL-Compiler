@@ -33,6 +33,8 @@ int main( int argc, char **argv )
     while (std::getline(instream, line))
     {
         line = llclpp.remove_comment(line);
+        line = llclpp.pad_whitespace(line);
+        line = llclpp.replace_semicolons(line);
 
         if (llclpp.is_param_macro_declaration(line))
             llclpp.load_param_macro_declaration(line);

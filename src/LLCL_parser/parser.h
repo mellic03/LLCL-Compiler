@@ -13,6 +13,8 @@ private:
 
 public:
 
+    void        feedcommand( llcl::Command command ) {  };
+
 };
 
 

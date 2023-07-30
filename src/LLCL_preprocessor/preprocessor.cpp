@@ -16,6 +16,55 @@ LLCLPP::remove_comment( std::string &line )
 }
 
 
+std::string &
+LLCLPP::pad_whitespace( std::string &line )
+{
+    bool in_string = false;
+
+    for (size_t i=0; i<line.length(); i++)
+    {
+        if (line[i] == '\"')
+            in_string = !in_string;
+
+        if (in_string)
+            continue;
+
+        else if (line[i] == '(' || line[i] == ')')
+        {
+            line.insert(i+1, " ");
+            line.insert(i,   " ");
+            i += 2;
+        }
+    }
+
+    return line;
+}
+
+
+std::string &
+LLCLPP::replace_semicolons( std::string &line )
+{
+    bool in_string = false;
+
+    for (size_t i=0; i<line.length(); i++)
+    {
+        if (line[i] == '\"')
+            in_string = !in_string;
+
+        if (in_string)
+            continue;
+
+        else if (line[i] == ';')
+        {
+            line[i] = '\n';
+        }
+    }
+
+    return line;
+}
+
+
+
 bool
 LLCLPP::is_basic_macro_declaration( std::string line )
 {

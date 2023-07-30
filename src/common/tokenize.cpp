@@ -122,3 +122,31 @@ llcltok::concatTokens( const std::vector<std::string> &tokens, int start, int en
 
     return str;
 }
+
+
+size_t
+llcltok::find( const std::string &line, std::string token )
+{
+    size_t pos = line.find(token);
+
+    if (pos == std::string::npos)
+        return std::string::npos;    
+
+    // Ensure token is not part of a string literal --------
+    int num_quote = 0;
+    for (size_t i=pos; i>0; i--)
+        if (line[i] == '\"')
+            num_quote += 1;
+
+    if (num_quote % 2 != 0)
+        return std::string::npos;
+    // -----------------------------------------------------
+
+    // Ensure token is not part of another token -----------
+    if (pos == 0 || line[pos-1] == ' ' || line[pos-1] == ')')
+        return pos;
+    // -----------------------------------------------------
+
+    return std::string::npos;
+}
+
