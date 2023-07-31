@@ -1,9 +1,30 @@
 # Low Level C-like Language (LLCL) Compiler
 
-## Why?
-This is a learning project, not intended for professional use.
 
-Below I document the development of the LLCL Compiler.
+#### Table of Contents  
+<div id="user-content-toc">
+    <ul>
+        <li><a href="#about-llcl">About LLCL</a></li>
+        <li><a href="#why">Why?</a></li>
+        <li><a href="#assembly-generation">Assembly Generation</a></li>
+        <ul>
+            <li><a href="#for-loops">For Loops</a></li>
+        </ul>
+        <li><a href="#the-preprocessor">The Preprocessor</a></li>
+        <ul>
+            <li><a href="#macros">Macros</a></li>
+        </ul>
+        <li><a href="#the-lexer">The Lexer</a></li>
+        <ul>
+            <li><a href="#tokenization">Tokenization</a></li>
+        </ul>
+        <li><a href="#the-parser">The Parser</a></li>
+        <ul>
+            <li><a href="#parsing-expressions">Parsing Expressions</a></li>
+            <li><a href="#evaluating-expressions">Evaluating Expressions</a></li>
+        </ul>
+    </ul>
+</div>
 
 
 ## About LLCL
@@ -23,7 +44,14 @@ The naming convention for pointers is to prefix them with "p_" for "pointer". Do
     - `f32`, `f64` - 32 and 64-bit floating point.
 
 
-## Generated Assembly
+## Why?
+This is a learning project, not intended for professional use.
+Here I document the development of the LLCL Compiler.
+
+
+
+## Assembly Generation
+
 - `rax` and `r8` are used for evaluating expressions
     ```nasm
     pop   r8
@@ -66,7 +94,7 @@ The naming convention for pointers is to prefix them with "p_" for "pointer". Do
     add   rsi,   1
     ```
 
-## Pre-processor
+## The Preprocessor
 In this section I document the process of developing the LLCL pre-processor.
 
 
@@ -75,13 +103,24 @@ Two types of macro exist, simple replacement macros and function-like macros.
 Function-like macros can take only a single parameter.
 
 
-## Lexer
+## The Lexer
 In this section I document the process of developing the LLCL Lexer.
 
 
-## Parser
+### Tokenization
+Tokenization text goes here.
+
+
+## The Parser
 In this section I document the process of developing the LLCL Parser.
 
+
+
+### Parsing Expressions
+Parsing text goes here.
+
+
+### Evaluating Expressions
 - Recursively parse expressions, generating a binary tree.
 - Generate x86_64 NASM by performing a post-order traversal of the tree.
 
