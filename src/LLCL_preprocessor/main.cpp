@@ -36,6 +36,13 @@ int main( int argc, char **argv )
         line = llclpp.pad_whitespace(line);
         line = llclpp.replace_semicolons(line);
 
+        size_t dotdot_pos = line.find("..");
+        if (dotdot_pos != std::string::npos)
+        {
+            line.insert(dotdot_pos+2, " ");
+            line.insert(dotdot_pos, " ");
+        }
+
         if (llclpp.is_param_macro_declaration(line))
             llclpp.load_param_macro_declaration(line);
 

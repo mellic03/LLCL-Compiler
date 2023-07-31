@@ -23,8 +23,41 @@ The naming convention for pointers is to prefix them with "p_" for "pointer". Do
     - `f32`, `f64` - 32 and 64-bit floating point.
 
 
+## Generated Assembly
+- `rax` and `r8` are used for evaluating expressions
+    ```nasm
+    pop   r8
+    pop   rax
+    idiv  r8
+    push  rax
+    ...
+    ```
+- `rsi` is used to store loop counters
+    ```nasm
+    mov   rsi,   0
+    ;
+    ; loop stuff
+    ;
+    add   rsi,   1
+    ```
+- For nested loops, the loop counter stored in `rsi` is pushed to the stack and then popped after the inner loop completes
+    ```nasm
+    mov   rsi,   0
+    push  rsi  ; save the loop counter
+    ;---------------------; inner loop
+        mov   rsi,   0
+        ;
+        ; inner loop stuff
+        ;
+        add   rsi,   1
+    ;--------------------------------;
+    pop   rsi  ; restore the loop counter
+    add   rsi,   1
+    ```
+
 ## Pre-processor
 In this section I document the process of developing the LLCL pre-processor.
+
 
 ### Macros
 Two types of macro exist, simple replacement macros and function-like macros.

@@ -28,31 +28,32 @@ llcl::Parser::write_parse_tree( ofstream &stream, llcl::Node *node, llcl::Functi
     write_parse_tree(stream, node->right, function);
 
     stream
-        << "pop rdx\n"
+        << "pop r8\n"
         << "pop rax\n";
 
     if (node->m_symbol.m_value == "+")
     {
         stream
-            << "add rax, rdx\n";
+            << "add rax, r8\n";
     }
 
     else if (node->m_symbol.m_value == "-")
     {
         stream
-            << "sub rax, rdx\n";
+            << "sub rax, r8\n";
     }
 
     else if (node->m_symbol.m_value == "*")
     {
         stream
-            << "mul rdx\n";
+            << "mul r8\n";
     }
 
     else if (node->m_symbol.m_value == "/")
     {
         stream
-            << "div rdx\n";
+            << "cqo\n"
+            << "div r8\n";
     }
 
     stream << "push rax\n";

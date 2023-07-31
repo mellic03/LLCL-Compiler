@@ -1,19 +1,17 @@
-#define size_8  1
-#define size_16 2
-#define size_32 4
-#define size_64 8
-
+#define RES_X 5
+#define RES_Y 5
 
 fn main( i64 argc  i64 pp_argv ) i08
 
-    i64 a = 15
-    i64 b = 5
-    i64 c = 1
+    i64 a = 10
+    i64 b = 0
+    
+    for 0..5
+        a = a-1
+        b = b+1
+    endfor
 
-    for 0 .. 3;  c=c*2;  endfor
-    for 0 .. 3;  c=c+1;  endfor
-
-    return c
+    return a+b
 
 endfn
 
