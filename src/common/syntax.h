@@ -56,7 +56,11 @@ namespace llcl
     {
         DEC, ASS, DEC_ASS,
 
-        FN_BEG, FN_END, FN_CALL, BUILTIN_CALL,
+        DEC_ASS_FN_CALL,    // i64 p_vec3 = alloc(3)
+        ASS_FN_CALL,        // p_vec3 = alloc(3)
+        FN_CALL,            // foo(x, y, z)
+    
+        FN_BEG, FN_END, BUILTIN_CALL,
         WH_BEG, WH_END,
         FR_BEG, FR_END,
         IF_BEG, IF_END,

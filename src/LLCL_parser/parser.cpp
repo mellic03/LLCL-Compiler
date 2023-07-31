@@ -104,6 +104,7 @@ llcl::Parser::parse_function_begin( const llcl::Command &command )
 
     std::string function_name = LLCL_FN_PREFIX + symbols[1].m_value;
     m_functions[function_name] = llcl::Function();
+    m_function_names.emplace(symbols[1].m_value);
     m_current_function_name = function_name;
 
     size_t rpar_pos;
@@ -128,6 +129,12 @@ llcl::Parser::parse_function_end()
 
     size_t byte_offset = 8;
 
+    for (auto &[name, var]: function.m_variables)
+    {
+        byte_offset += llcl::typesize(var.m_type);
+        var.m_byte_offset = byte_offset;
+    }
+
     for (auto &command: function.m_commands)
     {
         bool c1 = command.m_class == CommandClass::DEC;
@@ -145,10 +152,7 @@ llcl::Parser::parse_function_end()
         }
     }
 
-    for (auto &[name, var]: function.m_variables)
-    {
-        function.bytes_required  += llcl::typesize(var.m_type);
-    }
+    function.bytes_required = byte_offset;
 
     m_current_function_name = "NONE";
 }

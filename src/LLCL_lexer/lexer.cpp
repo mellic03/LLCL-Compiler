@@ -208,7 +208,6 @@ llcl::Lexer::feedline( std::string line )
         case SymbolClass::RETURN:   tokenize_function_return(tokens);   break;
 
         case SymbolClass::DTYPE:    tokenize_dec_ass(tokens);           break;
-
         case SymbolClass::SUBJECT:  tokenize_ass(tokens);               break;
 
         default:    break;

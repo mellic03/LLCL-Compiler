@@ -17,6 +17,7 @@ class llcl::Parser
 {
 private:
     std::map<std::string, llcl::Function>   m_functions;
+    std::set<std::string>                   m_function_names;
     std::string                             m_current_function_name = "NONE";
 
     std::vector<Symbol>     extract_par(const std::vector<Symbol> &symbols, size_t lpar_pos, size_t &rpar_pos);
@@ -25,6 +26,9 @@ private:
 
     void        parse_function_begin( const llcl::Command &command );
     void        parse_function_end();
+
+    void        write_dec_ass( ofstream &stream, int command_idx, Function &function );
+    void        write_dec_ass_fn_call( ofstream &stream, int command_idx, Function &function );
 
     void        write_for_begin( ofstream &stream, Function &function, Command &command );
     void        write_for_end( ofstream &stream, Function &function, Command &command );
