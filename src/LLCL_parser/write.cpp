@@ -61,10 +61,21 @@ llcl::Parser::write_parse_tree( ofstream &stream, llcl::Node *node, llcl::Functi
 }
 
 
+static int loop_nesting_level = 0;
+
 void
 llcl::Parser::write_for_begin( ofstream &stream, Function &function, Command &command )
 {
-    auto count = std::to_string(function.m_loop_counter);
+    if (loop_nesting_level == 0)
+    {
+        function.m_loop_counter += 1;
+    }
+
+
+    std::string loopcount = std::to_string(function.m_loop_counter);
+    std::string nesting   = std::to_string(loop_nesting_level);
+    std::string loop_id = loopcount + "_" + nesting;
+
     auto &symbols = command.m_symbols;
 
     auto loop_begin = symbols[1].m_value;
@@ -74,12 +85,16 @@ llcl::Parser::write_for_begin( ofstream &stream, Function &function, Command &co
 
     // Begin loop ---------------------------
     stream
-        << "mov rcx, " + loop_begin + "\n"
-        << "mov rsi, " + loop_end + "\n"
-        << "cmp rcx, rsi\n"
-        << "jge .LLCL_LOOP_END_" + count + "\n"
-        << ".LLCL_LOOP_BEGIN_" + count + ":\n";
+        << "push  r9   ; loop counter\n"
+        << "push  rcx  ; end value\n"
+        << "mov   r9,  " + loop_begin + "\n"
+        << "mov   rcx, " + loop_end + "\n"
+        << "cmp   r9,   rcx\n"
+        << "jge   .LLCL_LOOP_END_" + loop_id + "\n"
+        << ".LLCL_LOOP_BEGIN_"     + loop_id + ":\n";
     // --------------------------------------
+
+    loop_nesting_level += 1;
 
     stream.right();
 }
@@ -88,23 +103,30 @@ llcl::Parser::write_for_begin( ofstream &stream, Function &function, Command &co
 void
 llcl::Parser::write_for_end( ofstream &stream, Function &function, Command &command )
 {
-    auto count = std::to_string(function.m_loop_counter);
+    loop_nesting_level -= 1;
+
+    std::string loopcount = std::to_string(function.m_loop_counter);
+    std::string nesting   = std::to_string(loop_nesting_level);
+    std::string loop_id = loopcount + "_" + nesting;
+
     auto &symbols = command.m_symbols;
 
     // Increment loop counter ---------------
     stream
-        << "add rcx, 1  ; increment loop counter\n"
-        << "cmp rcx, rsi\n"
-        << "jge .LLCL_LOOP_END_" + count + "\n"
-        << "jmp .LLCL_LOOP_BEGIN_" + count + "\n";
+        << "add   r9,  1  ; increment loop counter\n"
+        << "cmp   r9,  rcx\n"
+        << "jge   .LLCL_LOOP_END_"   + loop_id + "\n"
+        << "jmp   .LLCL_LOOP_BEGIN_" + loop_id + "\n";
     // --------------------------------------
 
     // End loop -----------------------------
     stream.left();
-    stream << ".LLCL_LOOP_END_" + count + ":\n";
+    stream
+        << ".LLCL_LOOP_END_" + loop_id + ":\n"
+        << "\tpop   rcx\n"
+        << "\tpop   r9\n";
     // --------------------------------------
 
-    function.m_loop_counter += 1;
 }
 
 

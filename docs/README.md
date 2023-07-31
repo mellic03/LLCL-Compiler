@@ -32,6 +32,17 @@ The naming convention for pointers is to prefix them with "p_" for "pointer". Do
     push  rax
     ...
     ```
+
+
+### For Loops
+- LLCL Syntax
+    ```
+    for a..b
+        // code will execute b-a times
+    endfor
+    ```
+
+
 - `rsi` is used to store loop counters
     ```nasm
     mov   rsi,   0

@@ -1,18 +1,19 @@
 #define RES_X 5
 #define RES_Y 5
 
-fn main( i64 argc  i64 pp_argv ) i08
+fn main( i64 argc, i64 pp_argv ) i08
 
-    i64 a = 10
+    i64 a = 0
     i64 b = 0
-    
-    for 0..5
-        a = a-1
-        b = b+1
+
+    for 0..RES_X
+        for 0..RES_Y
+            b = b+1
+        endfor
+        a = a+1    
     endfor
 
-    return a+b
+    return a + b
 
 endfn
-
 

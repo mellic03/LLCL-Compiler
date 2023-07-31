@@ -1,6 +1,11 @@
 .vscode
 build
+
+llclc
 llclpp
-llcllexer
-llclparser
-nasmapi
+
+main.llclc
+main.llclpp
+main.asm
+forloop.asm
+a.out
