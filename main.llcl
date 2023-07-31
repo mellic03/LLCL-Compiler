@@ -4,17 +4,14 @@
 #define size_64 8
 
 
-fn alloc( i64 size ) i64
-
-
-endfn
-
-
 fn main( i64 argc  i64 pp_argv ) i08
 
     i64 a = 15
     i64 b = 5
-    i64 c = a + b
+    i64 c = 1
+
+    for 0 .. 3;  c=c*2;  endfor
+    for 0 .. 3;  c=c+1;  endfor
 
     return c
 

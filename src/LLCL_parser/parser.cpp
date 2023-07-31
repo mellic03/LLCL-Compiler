@@ -126,7 +126,7 @@ llcl::Parser::parse_function_end()
     // we can run through and determine how much
     // space is needed for local variables
 
-    size_t byte_offset = 16;
+    size_t byte_offset = 8;
 
     for (auto &command: function.m_commands)
     {
@@ -140,9 +140,8 @@ llcl::Parser::parse_function_end()
             Type dtype = llcl::type_fromstr(type_str);
 
             function.add_param(dtype, var_name);
-            function.m_variables[var_name].m_byte_offset = byte_offset;
-
             byte_offset += llcl::typesize(dtype);
+            function.m_variables[var_name].m_byte_offset = byte_offset;
         }
     }
 
@@ -166,11 +165,15 @@ llcl::Parser::feedcommand( llcl::Command command )
         // case CommandClass::ASS:         break;
         // case CommandClass::DEC_ASS:     break;
 
-        case CommandClass::FN_BEG:      parse_function_begin(command);      break;
-        case CommandClass::FN_END:      parse_function_end();        break;
+        case CommandClass::FN_BEG:      parse_function_begin(command);  break;
+        case CommandClass::FN_END:      parse_function_end();           break;
 
         // case CommandClass::WH_BEG:      break;
         // case CommandClass::WH_END:      break;
+
+
+        // case CommandClass::FR_BEG:      parse_for_begin(command);       break;
+        // case CommandClass::FR_END:      parse_for_end();                break;
 
         // case CommandClass::IF_BEG:      break;
         // case CommandClass::IF_END:      break;

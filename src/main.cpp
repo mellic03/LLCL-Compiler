@@ -34,26 +34,6 @@ int main(int argc, char **argv)
     parser.writeNASM(outstream);
     outstream.close();
 
-
-    std::vector<llcl::Symbol> symbols;
-
-    // (a + b) * 20 - (10 / 2)
-
-    symbols.push_back({llcl::SymbolClass::LPAR,     "("});
-    symbols.push_back({llcl::SymbolClass::LPAR,     "("});
-    symbols.push_back({llcl::SymbolClass::SUBJECT,  "a"});
-    symbols.push_back({llcl::SymbolClass::OPERATOR, "+"});
-    symbols.push_back({llcl::SymbolClass::SUBJECT,  "b"});
-    symbols.push_back({llcl::SymbolClass::RPAR,     ")"});
-    symbols.push_back({llcl::SymbolClass::RPAR,     ")"});
-
-    symbols.push_back({llcl::SymbolClass::OPERATOR, "*"});
-
-    symbols.push_back({llcl::SymbolClass::LITERAL,  "20"});
-
-    llcl::Node *node = parser.gen_parse_tree(symbols);
-    llcl::print_tree("", node, false);
-
     return 0;
 }
 

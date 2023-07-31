@@ -80,6 +80,8 @@ std::ostream &operator << (std::ostream &os, llcl::SymbolClass s_class)
         case llcl::SymbolClass::FN_END:     os << "FN_END";     break;
         case llcl::SymbolClass::WH_BEG:     os << "WH_BEG";     break;
         case llcl::SymbolClass::WH_END:     os << "WH_END";     break;
+        case llcl::SymbolClass::FR_BEG:     os << "FR_BEG";     break;
+        case llcl::SymbolClass::FR_END:     os << "FR_END";     break;
         case llcl::SymbolClass::IF_BEG:     os << "IF_BEG";     break;
         case llcl::SymbolClass::IF_END:     os << "IF_END";     break;
         case llcl::SymbolClass::RETURN:     os << "RETURN";     break;
@@ -101,6 +103,8 @@ std::ostream &operator << (std::ostream &os, llcl::CommandClass c_class)
         case llcl::CommandClass::FN_END:    os << "FN_END";     break;
         case llcl::CommandClass::WH_BEG:    os << "WH_BEG";     break;
         case llcl::CommandClass::WH_END:    os << "WH_END";     break;
+        case llcl::CommandClass::FR_BEG:    os << "FR_BEG";     break;
+        case llcl::CommandClass::FR_END:    os << "FR_END";     break;
         case llcl::CommandClass::IF_BEG:    os << "IF_BEG";     break;
         case llcl::CommandClass::IF_END:    os << "IF_END";     break;
         case llcl::CommandClass::RETURN:    os << "RETURN";     break;
@@ -121,6 +125,8 @@ llcl::SymbolClass llcl::symbolclass_fromstr( std::string str )
     if (str == "FN_END")        return SymbolClass::FN_END;
     if (str == "WH_BEG")        return SymbolClass::WH_BEG;
     if (str == "WH_END")        return SymbolClass::WH_END;
+    if (str == "FR_BEG")        return SymbolClass::FR_BEG;
+    if (str == "FR_END")        return SymbolClass::FR_END;
     if (str == "IF_BEG")        return SymbolClass::IF_BEG;
     if (str == "IF_END")        return SymbolClass::IF_END;
     if (str == "IF_END")        return SymbolClass::IF_END;
@@ -138,6 +144,8 @@ llcl::CommandClass llcl::commandclass_fromstr( std::string str )
     if (str == "FN_END")        return CommandClass::FN_END;
     if (str == "WH_BEG")        return CommandClass::WH_BEG;
     if (str == "WH_END")        return CommandClass::WH_END;
+    if (str == "FR_BEG")        return CommandClass::FR_BEG;
+    if (str == "FR_END")        return CommandClass::FR_END;
     if (str == "IF_BEG")        return CommandClass::IF_BEG;
     if (str == "IF_END")        return CommandClass::IF_END;
     if (str == "RETURN")        return CommandClass::RETURN;

@@ -23,6 +23,7 @@ project(llclpp)
 add_executable(
     ${PROJECT_NAME}
     "src/common/tokenize.cpp"
+    "src/common/syntax.cpp"
     "src/LLCL_preprocessor/preprocessor.cpp"
     "src/LLCL_preprocessor/main.cpp"
 )

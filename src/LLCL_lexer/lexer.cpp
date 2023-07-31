@@ -11,6 +11,8 @@ llcl::Lexer::deduce_symbol_class( std::string str )
     if (str == "if")        return SymbolClass::IF_BEG;
     if (str == "endif")     return SymbolClass::IF_END;
     if (str == "return")    return SymbolClass::RETURN;
+    if (str == "for")       return SymbolClass::FR_BEG;
+    if (str == "endfor")    return SymbolClass::FR_END;
     if (is_datatype(str))   return SymbolClass::DTYPE;
 
     return SymbolClass::SUBJECT;
@@ -118,6 +120,30 @@ llcl::Lexer::tokenize_function_return( std::vector<std::string> tokens )
 
 
 void
+llcl::Lexer::tokenize_for_begin( std::vector<std::string> tokens )
+{
+    llcl::Command command;
+    command.m_class = CommandClass::FR_BEG;
+
+    command.m_symbols.push_back({SymbolClass::FR_BEG, tokens[0]});
+    command.m_symbols.push_back({SymbolClass::LITERAL, tokens[1]});
+    command.m_symbols.push_back({SymbolClass::LITERAL, tokens[3]});
+
+    m_commands.push_back(command);
+}
+
+
+void
+llcl::Lexer::tokenize_for_end( std::vector<std::string> tokens )
+{
+    llcl::Command command;
+    command.m_class = CommandClass::FR_END;
+    command.m_symbols.push_back({SymbolClass::FR_END, tokens[0]});
+    m_commands.push_back(command);
+}
+
+
+void
 llcl::Lexer::tokenize_dec_ass( std::vector<std::string> tokens )
 {
     llcl::Command command;
@@ -169,12 +195,20 @@ llcl::Lexer::feedline( std::string line )
     {
         case SymbolClass::FN_BEG:   tokenize_function_begin(tokens);    break;
         case SymbolClass::FN_END:   tokenize_function_end(tokens);      break;
+
         case SymbolClass::WH_BEG:                                       break;
         case SymbolClass::WH_END:                                       break;
+
+        case SymbolClass::FR_BEG:   tokenize_for_begin(tokens);         break;
+        case SymbolClass::FR_END:   tokenize_for_end(tokens);           break;
+
         case SymbolClass::IF_BEG:                                       break;
         case SymbolClass::IF_END:                                       break;
+
         case SymbolClass::RETURN:   tokenize_function_return(tokens);   break;
+
         case SymbolClass::DTYPE:    tokenize_dec_ass(tokens);           break;
+
         case SymbolClass::SUBJECT:  tokenize_ass(tokens);               break;
 
         default:    break;

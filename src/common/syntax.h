@@ -38,6 +38,7 @@ namespace llcl
 
         FN_BEG, FN_END,
         WH_BEG, WH_END,
+        FR_BEG, FR_END,
         IF_BEG, IF_END,
 
         RETURN,
@@ -55,8 +56,9 @@ namespace llcl
     {
         DEC, ASS, DEC_ASS,
 
-        FN_BEG, FN_END,
+        FN_BEG, FN_END, FN_CALL, BUILTIN_CALL,
         WH_BEG, WH_END,
+        FR_BEG, FR_END,
         IF_BEG, IF_END,
 
         RETURN,
@@ -69,7 +71,6 @@ namespace llcl
        CommandClass             m_class;
        std::vector<Symbol>      m_symbols; 
     };
-
 
     enum class Type
     {

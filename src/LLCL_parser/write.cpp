@@ -60,6 +60,53 @@ llcl::Parser::write_parse_tree( ofstream &stream, llcl::Node *node, llcl::Functi
 }
 
 
+void
+llcl::Parser::write_for_begin( ofstream &stream, Function &function, Command &command )
+{
+    auto count = std::to_string(function.m_loop_counter);
+    auto &symbols = command.m_symbols;
+
+    auto loop_begin = symbols[1].m_value;
+    auto loop_end   = symbols[2].m_value;
+
+    stream << "\n";
+
+    // Begin loop ---------------------------
+    stream
+        << "mov rcx, " + loop_begin + "\n"
+        << "mov rsi, " + loop_end + "\n"
+        << "cmp rcx, rsi\n"
+        << "jge .LLCL_LOOP_END_" + count + "\n"
+        << ".LLCL_LOOP_BEGIN_" + count + ":\n";
+    // --------------------------------------
+
+    stream.right();
+}
+
+
+void
+llcl::Parser::write_for_end( ofstream &stream, Function &function, Command &command )
+{
+    auto count = std::to_string(function.m_loop_counter);
+    auto &symbols = command.m_symbols;
+
+    // Increment loop counter ---------------
+    stream
+        << "add rcx, 1  ; increment loop counter\n"
+        << "cmp rcx, rsi\n"
+        << "jge .LLCL_LOOP_END_" + count + "\n"
+        << "jmp .LLCL_LOOP_BEGIN_" + count + "\n";
+    // --------------------------------------
+
+    // End loop -----------------------------
+    stream.left();
+    stream << ".LLCL_LOOP_END_" + count + ":\n";
+    // --------------------------------------
+
+    function.m_loop_counter += 1;
+}
+
+
 
 void
 llcl::Parser::write_function( ofstream &stream, std::string name, Function &function )
@@ -113,6 +160,16 @@ llcl::Parser::write_function( ofstream &stream, std::string name, Function &func
             stream
                 << "pop qword rax\n"
                 << "mov qword [rbp + " + std::to_string(var.m_byte_offset) + "], rax\n";
+        }
+
+        else if (command.m_class == CommandClass::FR_BEG)
+        {
+            write_for_begin(stream, function, command);
+        }
+
+        else if (command.m_class == CommandClass::FR_END)
+        {
+            write_for_end(stream, function, command);
         }
 
         // Evaluate expression to right of "return"

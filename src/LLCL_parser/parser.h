@@ -26,6 +26,8 @@ private:
     void        parse_function_begin( const llcl::Command &command );
     void        parse_function_end();
 
+    void        write_for_begin( ofstream &stream, Function &function, Command &command );
+    void        write_for_end( ofstream &stream, Function &function, Command &command );
     void        write_function( ofstream &stream, std::string name, Function &function );
 
 

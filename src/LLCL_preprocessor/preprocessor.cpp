@@ -29,12 +29,19 @@ LLCLPP::pad_whitespace( std::string &line )
         if (in_string)
             continue;
 
-        else if (line[i] == '(' || line[i] == ')')
+        bool pad = false;
+
+        pad |= line[i] == '(' || line[i] == ')';
+        pad |= line[i] == '=';
+        pad |= llcl::is_operator(line.substr(i, 1));
+
+        if (pad)
         {
             line.insert(i+1, " ");
             line.insert(i,   " ");
             i += 2;
         }
+
     }
 
     return line;

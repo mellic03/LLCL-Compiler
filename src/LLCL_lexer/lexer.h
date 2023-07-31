@@ -16,6 +16,10 @@ private:
     void                tokenize_function_begin( std::vector<std::string> tokens );
     void                tokenize_function_end( std::vector<std::string> tokens );
     void                tokenize_function_return( std::vector<std::string> tokens );
+
+    void                tokenize_for_begin( std::vector<std::string> tokens );
+    void                tokenize_for_end( std::vector<std::string> tokens );
+
     void                tokenize_dec_ass( std::vector<std::string> tokens );
     void                tokenize_ass( std::vector<std::string> tokens );
 

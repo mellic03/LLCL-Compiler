@@ -3,6 +3,9 @@
 ## Why?
 This is a learning project, not intended for professional use.
 
+Below I document the development of the LLCL Compiler.
+
+
 ## About LLCL
 LLCL is a very low level (lower than C) programming language:
 
@@ -18,6 +21,14 @@ The naming convention for pointers is to prefix them with "p_" for "pointer". Do
     - `u08`, `u16`, `u32`, `u64` - unsigned 8, 16, 32 and 64-bit integers.
     - `i08`, `i16`, `i32`, `i64` - signed 8, 16, 32 and 64-bit integers.
     - `f32`, `f64` - 32 and 64-bit floating point.
+
+
+## Pre-processor
+In this section I document the process of developing the LLCL pre-processor.
+
+### Macros
+Two types of macro exist, simple replacement macros and function-like macros.
+Function-like macros can take only a single parameter.
 
 
 ## Lexer

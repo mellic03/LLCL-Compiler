@@ -24,6 +24,7 @@ struct llcl::Function
 {
     size_t                      m_num_params;
     size_t                      bytes_required = 8;
+    size_t                      m_loop_counter = 0;
 
     // The first m_num_params variables are the function parameters
     std::map<std::string, Variable>     m_variables;

@@ -51,8 +51,6 @@ int main( int argc, char **argv )
         while (llclpp.find_param_macro_reference(line, macro_name, macro_pos))
             llclpp.replace_param_macro_reference(line, macro_name, macro_pos);
 
-
-        std::cout << line << "\n";
         outstream << line << "\n";
     }
 
